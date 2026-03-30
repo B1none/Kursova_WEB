@@ -1,0 +1,783 @@
+/* Загальні стилі */ 
+* { /* Універсальний селектор */
+    margin: 0; /* Властивість margin */
+    padding: 0; /* Властивість padding */
+    box-sizing: border-box; /* Box-sizing властивість */
+}
+
+:root { /* CSS змінні (Custom Properties) */
+    --primary-color: #ff4444; /* CSS змінна --primary-color */
+    --secondary-color: #1a1a1a; /* CSS змінна для вторинного кольору */
+    --text-color: #ffffff; /* CSS змінна для тексту */
+    --accent-color: #ffcc00; /* CSS змінна для акцентування */
+    --card-bg: #2a2a2a; /* CSS змінна для фону карток */
+    --hover-color: #ff6666; /* CSS змінна для
+}
+
+body { /* CSS селектор для body */
+    font-family: 'Arial', sans-serif; /* Властивість font-family */
+    background-color: var(--secondary-color); /* Використання CSS змінної */
+    color: var(--text-color); /* Колір тексту */
+    line-height: 1.6; /* Висота лінії тексту */
+}
+
+/* Навігаційне меню */ /* Коментар для нової секції CSS */
+header { /* CSS селектор header */
+    background-color: rgba(0, 0, 0, 0.95); /* RGBA колір з прозорістю */
+    position: sticky; /* Position властивість */
+    top: 0; /* Top властивість */
+    z-index: 100; /* Z-index для шарів */
+    box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3); /* Box-shadow для тіні */
+}
+
+.navbar { /* CSS class селектор */
+    padding: 1rem 0; /* Padding властивість */
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-color);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Героїчна секція */
+.hero-section {
+    background: linear-gradient(135deg, rgba(255, 68, 68, 0.2) 0%, rgba(26, 26, 26, 0.9) 100%);
+    padding: 8rem 2rem;
+    text-align: center;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content h2 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Кнопки */
+.btn-primary,
+.btn-search {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-primary:hover,
+.btn-search:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(255, 68, 68, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Каталог секція */
+.catalog-section {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.catalog-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+    text-align: center;
+}
+
+.filter-container {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(255, 68, 68, 0.1);
+}
+
+.search-bar {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.search-input {
+    flex: 1;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
+}
+
+.filter-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.filter-controls label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+.filter-select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-select:hover,
+.filter-select:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    outline: none;
+}
+
+.filter-select option {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+/* Grid героїв */
+.heroes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(181px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.hero-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 560px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border: 2px solid transparent;
+}
+
+.hero-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(255, 68, 68, 0.3);
+    border-color: var(--primary-color);
+}
+
+.hero-image {
+    width: 181px;
+    height: 329px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    overflow: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.hero-bottom {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.hero-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+.hero-type {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.hero-description {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+    min-height: 4.2rem;
+    line-height: 1.3rem;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.power-bar {
+    width: 100%;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.power-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    transition: width 0.3s ease;
+}
+
+.hero-actions {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+    align-items: stretch;
+    margin-top: 0.75rem;
+}
+
+.btn-details,
+.btn-favorite {
+    min-height: 2.4rem;
+    padding: 0.45rem 0.7rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.4s ease;
+    font-size: 0.8rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.btn-details {
+    width: 100%;
+}
+
+.btn-favorite {
+    width: auto;
+    padding: 0.45rem 0.6rem;
+}
+
+.btn-details {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.btn-details:hover {
+    background-color: var(--hover-color);
+}
+
+.btn-favorite {
+    background-color: rgba(255, 204, 0, 0.2);
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+}
+
+.btn-favorite:hover {
+    background-color: rgba(255, 204, 0, 0.4);
+}
+
+.btn-favorite.active {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+}
+
+/* Модальне вікно */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: auto;
+    padding: 2rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 12px 40px rgba(255, 68, 68, 0.4);
+}
+
+.modal-close {
+    color: var(--primary-color);
+    float: right;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: var(--hover-color);
+}
+
+.hero-detail h2 {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.hero-detail p {
+    margin: 1rem 0;
+    line-height: 1.8;
+}
+
+.detail-abilities {
+    background-color: rgba(255, 68, 68, 0.1);
+    padding: 1.5rem;
+    border-radius: 5px;
+    margin: 1rem 0;
+}
+
+.detail-abilities h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.ability {
+    margin: 0.8rem 0;
+    padding-left: 1rem;
+    border-left: 3px solid var(--primary-color);
+}
+
+.ability-name {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+/* Улюблені герої */
+.favorites-section,
+.stats-section,
+.voting-section {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(255, 68, 68, 0.1);
+}
+
+.favorites-section h2,
+.stats-section h2,
+.voting-section h2 {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.favorites-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.empty-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.1rem;
+}
+
+.favorite-item {
+    background-color: rgba(255, 204, 0, 0.1);
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.favorite-item h3 {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.remove-favorite {
+    margin-top: 1rem;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.remove-favorite:hover {
+    background-color: var(--hover-color);
+}
+
+/* Статистика */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, rgba(255, 68, 68, 0.2), rgba(255, 204, 0, 0.1));
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.stat-card h3 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.stat-card .stat-value {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+}
+
+/* Порівняння героїв */
+.comparison-section {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+}
+
+.comparison-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.comparison-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.comparison-result {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.comparison-hero {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid var(--primary-color);
+}
+
+.comparison-hero h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.comparison-stat {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.8rem 0;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 68, 68, 0.2);
+}
+
+.comparison-stat-label {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.comparison-stat-value {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+/* Голосування */
+.voting-section {
+    text-align: center;
+}
+
+.vote-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.vote-container select {
+    padding: 0.8rem 1.5rem;
+    min-width: 250px;
+}
+
+.vote-message {
+    color: var(--accent-color);
+    font-weight: bold;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Таблиця */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+
+thead {
+    background-color: var(--primary-color);
+}
+
+thead th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+tbody td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(255, 68, 68, 0.2);
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 68, 68, 0.1);
+}
+
+/* Footer */
+footer {
+    background-color: rgba(0, 0, 0, 0.9);
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    border-top: 2px solid var(--primary-color);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .hero-section {
+        padding: 4rem 1rem;
+    }
+
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+
+    .heroes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
+
+    .filter-controls {
+        grid-template-columns: 1fr;
+    }
+
+    .comparison-controls {
+        grid-template-columns: 1fr;
+    }
+
+    .comparison-result {
+        grid-template-columns: 1fr;
+    }
+
+    .vote-container {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .vote-container select,
+    .vote-container button {
+        width: 100%;
+    }
+
+    .stat-card {
+        min-width: 150px;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .nav-menu {
+        gap: 0.3rem;
+        font-size: 0.9rem;
+    }
+
+    .hero-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .catalog-section h2,
+    .favorites-section h2,
+    .stats-section h2,
+    .voting-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .heroes-grid {
+        grid-template-columns: 1fr;
+    }
+}

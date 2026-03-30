@@ -1,0 +1,514 @@
+<!DOCTYPE html> <!-- Основний тип документу -->
+<html lang="uk"> <!-- HTML елемент з мовою -->
+<head> <!-- Голова документу -->
+    <meta charset="UTF-8"> <!-- Кодування символів -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Адаптивна ширина -->
+    <title>Деталі персонажа - Marvel Rivals</title> <!-- Заголовок сторінки -->
+    <link rel="stylesheet" href="css/styles.css"> <!-- Посилання на CSS -->
+    <style>  
+        .hero-details-page { /* CSS селектор класу */
+            max-width: 1200px; /* Max-width властивість */
+            margin: 0 auto; /* Auto margin */
+            padding: 2rem; /* Padding */
+        }
+
+        .hero-header { /* Новий CSS клас */
+            display: grid; /* Grid display */
+            grid-template-columns: 300px 1fr; /* Grid columns */
+            gap: 3rem; /* Gap для grid */
+            margin-bottom: 3rem; /* Margin */
+            background-color: var(--card-bg); /* Використання CSS змінної */
+            padding: 2rem; /* Padding */
+            border-radius: 10px; /* Border-radius для скруглення */
+            border: 2px solid var(--primary-color); /* Border властивість */
+        }
+
+        .hero-image-large { /* CSS клас для великого зображення */
+            width: 100%; /* Width властивість */
+            height: 400px; /* Height властивість */
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); /* Linear-gradient */
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            overflow: hidden;
+        }
+
+        .hero-image-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-basic-info h1 {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .hero-basic-info .hero-type {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .hero-basic-info .role-badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+            font-weight: bold;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item {
+            background-color: rgba(255, 68, 68, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .stat-item-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .stat-item-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-top: 0.5rem;
+        }
+
+        .section {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 68, 68, 0.2);
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section h2::before {
+            content: '';
+            width: 4px;
+            height: 1.8rem;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .story-text {
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        .abilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ability-card {
+            background-color: rgba(255, 204, 0, 0.1);
+            border: 2px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .ability-card:hover {
+            background-color: rgba(255, 204, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(255, 204, 0, 0.2);
+        }
+
+        .ability-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .ability-description {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.95rem;
+        }
+
+        .comparison-stats {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .comparison-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 68, 68, 0.2);
+        }
+
+        .comparison-stat:last-child {
+            border-bottom: none;
+        }
+
+        .stat-bar {
+            height: 8px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+            width: 100%;
+        }
+
+        .stat-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 4px;
+        }
+
+        .team-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .team-card {
+            background-color: rgba(255, 68, 68, 0.1);
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .team-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        .quote-section {
+            background: linear-gradient(135deg, rgba(255, 68, 68, 0.2), rgba(255, 204, 0, 0.1));
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .quote-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-source {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: var(--hover-color);
+            transform: translateX(-5px);
+        }
+
+        .relations-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .relation-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .relation-card:hover {
+            background-color: rgba(255, 68, 68, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .relation-name {
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 0.95rem;
+        }
+
+        .gallery-section {
+            margin-top: 2rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background-color: rgba(255, 68, 68, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 68, 68, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 16px rgba(255, 68, 68, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero-header {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .hero-basic-info h1 {
+                font-size: 2rem;
+            }
+
+            .section h2 {
+                font-size: 1.3rem;
+            }
+
+            .abilities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-bar {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <span class="logo" onclick="window.open('https://www.marvelrivals.com', '_blank')">⚡ Marvel Rivals</span>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">← Назад до каталогу</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="hero-details-page">
+        <a href="index.html" class="back-button">← Назад до каталогу</a>
+
+        <div id="heroContent">
+            <!-- Контент будет загружен через JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Marvel Rivals Heros. Курсова робота з дисципліни "WEB-технології та WEB-дизайн"</p>
+    </footer>
+
+    <script src="js/data-extended.js"></script>
+    <script>
+        // Отримати ID героя з URL
+        function getHeroIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return parseInt(params.get('id'));
+        }
+
+        // Завантажити та відобразити деталі героя
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroId = getHeroIdFromUrl();
+            
+            if (!heroId) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Знайти героя у базі
+            const hero = heroesDataExtended.find(h => h.id === heroId);
+            
+            if (!hero) {
+                document.getElementById('heroContent').innerHTML = 
+                    '<p style="color: var(--primary-color); font-size: 1.2rem;">❌ Персонажа не знайдено!</p>';
+                return;
+            }
+
+            // Відобразити героя
+            displayHeroDetails(hero);
+        });
+
+        function displayHeroDetails(hero) {
+            const imageHtml = hero.image ? 
+                `<img src="${hero.image}" alt="${hero.name}">` :
+                hero.emoji;
+
+            const relationsHTML = hero.relations && hero.relations.length > 0 ? 
+                `<div class="relations-section">
+                    ${hero.relations.map(rel => 
+                        `<div class="relation-card">
+                            <div class="relation-name">${rel}</div>
+                        </div>`
+                    ).join('')}
+                </div>` : 
+                '<p style="color: rgba(255, 255, 255, 0.6);">Особлива не пов\'язана з іншими персонажами</p>';
+
+            const abilitiesHTML = hero.abilities.map(ability => 
+                `<div class="ability-card">
+                    <div class="ability-name">⚡ ${ability.name}</div>
+                    <div class="ability-description">${ability.description}</div>
+                </div>`
+            ).join('');
+
+            const statsHTML = `
+                <div class="stat-item">
+                    <div class="stat-item-label">Рівень сили</div>
+                    <div class="stat-item-value">${hero.power}/10</div>
+                    <div class="stat-bar">
+                        <div class="stat-bar-fill" style="width: ${hero.power * 10}%"></div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-item-label">Здоров'я (HP)</div>
+                    <div class="stat-item-value">${hero.health}</div>
+                    <div class="stat-bar">
+                        <div class="stat-bar-fill" style="width: ${Math.min(hero.health / 3, 100)}%"></div>
+                    </div>
+                </div>
+            `;
+
+            const teamHTML = hero.team ? 
+                `<div class="team-card">
+                    <h3>Команда</h3>
+                    <p>${hero.team}</p>
+                </div>` : '';
+
+            const quoteHTML = hero.quote ? 
+                `<div class="quote-section">
+                    <div class="quote-text">"${hero.quote}"</div>
+                    <div class="quote-source">— ${hero.name}</div>
+                </div>` : '';
+
+            const distributionDate = hero.releaseDate ? 
+                new Date(hero.releaseDate).toLocaleDateString('uk-UA') : 'N/A';
+
+            document.getElementById('heroContent').innerHTML = `
+                ${quoteHTML}
+
+                <div class="hero-header">
+                    <div class="hero-image-large">${imageHtml}</div>
+                    <div class="hero-basic-info">
+                        <h1>${hero.emoji} ${hero.name}</h1>
+                        <span class="hero-type">${hero.type}</span>
+                        <span class="role-badge">${hero.role}</span>
+                        <div class="stats-grid">
+                            ${statsHTML}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Опис</h2>
+                    <p class="story-text">${hero.fullDescription}</p>
+                </div>
+
+                <div class="section">
+                    <h2>Історія персонажа</h2>
+                    <p class="story-text">${hero.story}</p>
+                </div>
+
+                <div class="section">
+                    <h2>Здібності</h2>
+                    <div class="abilities-grid">
+                        ${abilitiesHTML}
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Інформація про персонажа</h2>
+                    <div class="comparison-stats">
+                        <div class="comparison-stat">
+                            <span>Команда:</span>
+                            <span style="font-weight: bold; color: var(--accent-color);">${hero.team}</span>
+                        </div>
+                        <div class="comparison-stat">
+                            <span>Тип:</span>
+                            <span style="font-weight: bold; color: var(--accent-color);">${hero.type}</span>
+                        </div>
+                        <div class="comparison-stat">
+                            <span>Роль у грі:</span>
+                            <span style="font-weight: bold; color: var(--accent-color);">${hero.role}</span>
+                        </div>
+                        <div class="comparison-stat">
+                            <span>Дата випуску:</span>
+                            <span style="font-weight: bold; color: var(--accent-color);">${distributionDate}</span>
+                        </div>
+                    </div>
+                </div>
+
+                ${hero.relations && hero.relations.length > 0 ? `
+                <div class="section">
+                    <h2>Пов'язані персонажі</h2>
+                    ${relationsHTML}
+                </div>
+                ` : ''}
+
+                <div style="text-align: center; margin-top: 3rem; padding: 2rem; background-color: rgba(255, 68, 68, 0.1); border-radius: 10px;">
+                    <a href="index.html" class="back-button">← Повернутись до каталогу</a>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

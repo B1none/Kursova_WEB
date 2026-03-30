@@ -1,0 +1,145 @@
+<!DOCTYPE html> <!-- Основний тип документу -->
+<html lang="uk"> <!-- HTML элемент з мовою uk -->
+<head> <!-- Голова документу -->
+    <meta charset="UTF-8"> <!-- Кодування UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Meta viewport для адаптивного дизайну -->
+    <title>Marvel Rivals - Герої та персонажі</title> <!-- Заголовок сторінки -->
+    <link rel="stylesheet" href="css/styles.css"> <!-- Посилання на зовнішній CSS файл -->
+</head> <!-- Кінець голови -->
+<body> <!-- Основне тіло документу -->
+    <!-- Навігаційне меню --> 
+    <header> <!-- Header елемент для шапки -->
+        <nav class="navbar"> <!-- Nav елемент з класом navbar -->
+            <div class="nav-container"> <!-- DIV контейнер для навігації -->
+                <span class="logo" onclick="window.open('https://www.marvelrivals.com', '_blank')">⚡ Marvel Rivals</span> <!-- Логотип посилання на офіційний сайт -->
+                <ul class="nav-menu"> <!-- Ненумерований список навігації -->
+                    <li><a href="#home" class="nav-link active">Головна</a></li> <!-- LI из A элемент с href -->
+                    <li><a href="#catalog" class="nav-link">Каталог героїв</a></li> <!-- Link до каталогу -->
+                    <li><a href="#favorites" class="nav-link">Улюблені</a></li> <!-- Link до улюблених -->
+                    <li><a href="#stats" class="nav-link">Статистика</a></li> <!-- Link до статистики -->
+                </ul> <!-- Кінець списка навігації -->
+            </div> <!-- Кінець контейнеру -->
+        </nav> <!-- Кінець навіции -->
+    </header> <!-- Кінець header -->
+
+    <!-- Основний контент сторінки --> 
+    <main> <!-- Main елемент для основного контенту -->
+        <!-- Головна секція --> 
+        <section id="home" class="hero-section"> <!-- Section елемент z ID та класом -->
+        <div class="hero-content"> <!-- DIV для контенту героя -->
+            <h2>Ласкаво просимо до Marvel Rivals</h2> <!-- H2 заголовок -->
+            <p>Дослідіть світ супергероїв та магічних істот</p> <!-- P елемент зі текстом -->
+            <button class="btn-primary" onclick="scrollToSection('catalog')">Переглянути героїв</button> <!-- Button з класом та onclick -->
+        </div> <!-- Кінець div -->
+    </section> <!-- Кінець section -->
+
+    <!-- Фільтрація та пошук --> 
+    <section id="catalog" class="catalog-section">
+        <div class="filter-container">
+            <h2>Каталог героїв</h2>
+            
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Пошук героя..." class="search-input">
+                <button onclick="searchHeroes()" class="btn-search">🔍 Шукати</button>
+            </div>
+
+            <div class="filter-controls">
+                <label>Фільтр за типом:</label>
+                <select id="typeFilter" onchange="filterHeroes()" class="filter-select">
+                    <option value="">Всі типи</option>
+                    <option value="Superhero">Супергерой</option>
+                    <option value="Villain">Лиходій</option>
+                    <option value="Mutant">Мутант</option>
+                    <option value="Alien">Інопланетянин</option>
+                </select>
+
+                <label>Фільтр за силою:</label>
+                <select id="powerFilter" onchange="filterHeroes()" class="filter-select">
+                    <option value="">Вся сила</option>
+                    <option value="1">1-2</option>
+                    <option value="2">3-5</option>
+                    <option value="3">6-8</option>
+                    <option value="4">9-10</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Grid героїв -->
+        <div id="heroesGrid" class="heroes-grid">
+            <!-- Герої будуть завантажені через JavaScript -->
+        </div>
+    </section>
+
+    <!-- Улюблені герої -->
+    <section id="favorites" class="favorites-section">
+        <h2>Мої улюблені герої</h2>
+        <div id="favoritesList" class="favorites-list">
+            <p class="empty-message">Ви ще не додали улюблених героїв</p>
+        </div>
+        </section>
+
+        <!-- Статистика -->
+        <section id="stats" class="stats-section">
+        <h2>Статистика</h2>
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3>Всього героїв</h3>
+                <p id="totalHeroes" class="stat-value">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Улюблених</h3>
+                <p id="favoritesCount" class="stat-value">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Найпопулярніший</h3>
+                <p id="mostPopular" class="stat-value">-</p>
+            </div>
+        </div>
+
+        <div class="comparison-section">
+            <h3>Порівняння героїв</h3>
+            <div class="comparison-controls">
+                <select id="hero1Select" class="filter-select">
+                    <option value="">Виберіть героя 1</option>
+                </select>
+                <select id="hero2Select" class="filter-select">
+                    <option value="">Виберіть героя 2</option>
+                </select>
+                <button onclick="compareHeroes()" class="btn-primary">Порівняти</button>
+            </div>
+            <div id="comparisonResult" class="comparison-result"></div>
+        </div>
+        </section>
+
+        <!-- Форма голосування -->
+        <section class="voting-section">
+        <h2>Голосування за улюбленого героя</h2>
+        <div class="vote-container">
+            <select id="voteHero" class="filter-select">
+                <option value="">Виберіть героя</option>
+            </select>
+            <button onclick="voteFavorite()" class="btn-primary">Голосувати</button>
+            <p id="voteMessage" class="vote-message"></p>
+        </div>
+        </section>
+
+        <!-- Модальне вікно для деталей героя -->
+        <div id="heroModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="heroDetail" class="hero-detail">
+                <!-- Деталі героя будуть завантажені через JavaScript -->
+            </div>
+            </div>
+        </div>
+    </main> <!-- Кінець main -->
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Marvel Rivals Heros. Курсова робота з дисципліни "WEB-технології та WEB-дизайн"</p>
+    </footer>
+
+    <script src="js/data-extended.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
