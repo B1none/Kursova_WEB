@@ -816,7 +816,7 @@ const heroesDataExtended = [ // Основна база даних з усіма
             { name: "Ice Crystallize", description: "Крісталізація льоду" },
             { name: "Freeze Field", description: "Льодисте поле" },
             { name: "Music Power", description: "Сила музики" },
-            { name: "Healing Melody", description: "Исцеляющая мелодия" }
+            { name: "Healing Melody", description: "Зцілююча мелодія" }
         ],
         image: "images/heroes/luna-snow.png",
         emoji: "🎤",
