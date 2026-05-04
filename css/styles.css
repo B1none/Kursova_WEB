@@ -49,6 +49,7 @@ header { /* CSS селектор header */
     color: var(--primary-color);
     text-transform: uppercase;
     letter-spacing: 2px;
+    cursor: pointer;
 }
 
 .nav-menu {
