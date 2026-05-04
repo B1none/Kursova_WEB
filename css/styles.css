@@ -219,10 +219,12 @@ header { /* CSS селектор header */
 
 /* Grid героїв */
 .heroes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(181px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
     margin-top: 2rem;
+    width: 100%;
+    justify-content: flex-start;
 }
 
 .hero-card {
@@ -237,6 +239,8 @@ header { /* CSS селектор header */
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     border: 2px solid transparent;
+    flex: 0 1 181px;
+    max-width: 181px;
 }
 
 .hero-card:hover {
